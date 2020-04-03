@@ -13,7 +13,6 @@ const bodyParser = require('body-parser')
 
 
 
-
 // settings
 app.set('port', process.env.PORT || 443)
 app.set('json spaces', 2);
@@ -79,10 +78,5 @@ io.on('connection', (socket)=>{
     console.log("hey x2")
     io.sockets.emit("start_game",data)
   });
-
-
-
-
-
 
 });
