@@ -14,7 +14,10 @@ const bodyParser = require('body-parser')
 
 
 // settings
-app.set('port', process.env.PORT || 443)
+//app.set('port', process.env.PORT || 3000)
+
+
+app.listen(443)
 app.set('json spaces', 2);
 // middlewarese
 app.use(morgan('dev'));
