@@ -72,6 +72,7 @@ const server = app.listen(8080, () => {
  
 const io = socketIO.listen(server);
 
+io.set('origins', '*:*');
 io.on('connection', (socket)=>{
   console.log("new connection")
   console.log("coneccion ",socket.id)
