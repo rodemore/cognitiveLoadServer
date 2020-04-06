@@ -11,10 +11,21 @@ const config = require('./config');
 const socketIO = require('socket.io');
 const bodyParser = require('body-parser')
 
+
+
+/**
+ app.use(cors(
+  config.application.cors.server
+));
+*/
+app.use((req, res, next) => {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+   next();
+}) 
 app.use(cors());
 app.options('*', cors());
-
-
 
 // settings
 //app.set('port', process.env.PORT || 3000)
@@ -36,14 +47,6 @@ app.use(bodyParser.urlencoded({limit: '200mb', extended: true, parameterLimit: 1
 //app.use(express.bodyParser({limit: '50mb'}))
 
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-  next();
-});
-
 // routes
 app.use(require('./routes/index'));
 app.use("/api/data",require('./routes/data'));
@@ -59,9 +62,6 @@ const server = app.listen(app.get('port'), () => {
 
 */
 
-const server = app.listen(8080, () => {
-  console.log(`Server on port ${8080}`);
-});
 
 
 
@@ -100,4 +100,8 @@ io.on('connection', (socket)=>{
     io.sockets.emit("start_game",data)
   });
 
+});
+
+const server = app.listen(8080, () => {
+  console.log(`Server on port ${8000}`);
 });
