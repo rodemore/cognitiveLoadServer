@@ -33,11 +33,18 @@ app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true, parameterLimit: 1000000}))
 //app.use(express.bodyParser({limit: '50mb'}))
 
-app.use(cors());
+//app.use(cors());
 // routes
 app.use(require('./routes/index'));
 app.use("/api/data",require('./routes/data'));
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
 
 
 // starting the server
