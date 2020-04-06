@@ -5,7 +5,7 @@ const router = Router();
 
 
 router.get("/", (req,res) => {
-    res.json({"Title": "cognitive Load server"});
+    res.json({"Title": "cognitive Load server2"});
 })
 
 
