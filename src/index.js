@@ -11,6 +11,8 @@ const config = require('./config');
 const socketIO = require('socket.io');
 const bodyParser = require('body-parser')
 
+app.use(cors());
+app.options('*', cors());
 
 
 
@@ -33,10 +35,6 @@ app.use(bodyParser.json({limit: '200mb'}));
 app.use(bodyParser.urlencoded({limit: '200mb', extended: true, parameterLimit: 1000000}))
 //app.use(express.bodyParser({limit: '50mb'}))
 
-//app.use(cors());
-// routes
-app.use(require('./routes/index'));
-app.use("/api/data",require('./routes/data'));
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -45,6 +43,12 @@ app.use((req, res, next) => {
   res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 });
+
+// routes
+app.use(require('./routes/index'));
+app.use("/api/data",require('./routes/data'));
+
+
 
 
 // starting the server
