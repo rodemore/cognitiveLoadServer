@@ -15,9 +15,9 @@ const bodyParser = require('body-parser')
 
 // settings
 //app.set('port', process.env.PORT || 3000)
+//const server = app.listen(8080)
+app.set('port', process.env.PORT || 8080)
 
-
-app.listen(443)
 app.set('json spaces', 2);
 // middlewarese
 app.use(morgan('dev'));
@@ -42,9 +42,14 @@ app.use("/api/data",require('./routes/data'));
 
 
 // starting the server
+
 const server = app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get('port')}`);
 });
+
+
+
+
 
   
 
