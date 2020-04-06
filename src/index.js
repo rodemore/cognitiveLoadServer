@@ -70,6 +70,10 @@ const server = app.listen(app.get('port'), () => {
 
 //websockets
  
+const server = app.listen(8080, () => {
+  console.log(`Server on port ${8000}`);
+});
+
 const io = socketIO.listen(server);
 
 io.set('origins', '*:*');
@@ -102,6 +106,3 @@ io.on('connection', (socket)=>{
 
 });
 
-const server = app.listen(8080, () => {
-  console.log(`Server on port ${8000}`);
-});
