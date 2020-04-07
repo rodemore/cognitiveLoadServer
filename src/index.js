@@ -61,7 +61,7 @@ var io = require('socket.io')(server);
 
 
 
-io.set('origins', '*:*');
+io.origins('*:*');
 io.on('connection', (socket)=>{
   console.log("new connection")
   console.log("coneccion ",socket.id)
