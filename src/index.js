@@ -2,14 +2,17 @@
 
 const fs = require('fs');
 
+
 const express = require('express');
 const app = express();
 
 const morgan = require('morgan');
 const cors = require('cors');
 const config = require('./config');
-const socketIO = require('socket.io');
+
 const bodyParser = require('body-parser')
+
+
 
 
 
@@ -51,32 +54,13 @@ app.use(bodyParser.urlencoded({limit: '200mb', extended: true, parameterLimit: 1
 app.use(require('./routes/index'));
 app.use("/api/data",require('./routes/data'));
 
-
-
-
-// starting the server
-/** 
-const server = app.listen(app.get('port'), () => {
-    console.log(`Server on port ${app.get('port')}`);
-});
-
-*/
+var server = require("http").Server(app)
+var io = require('socket.io')(server);
 
 
 
 
-
-  
-
-//websockets
- 
-const server = app.listen(8080, () => {
-  console.log(`Server on port ${8000}`);
-});
-
-const io = socketIO.listen(server);
-
-io.set('origins', '*:*');
+//io.set('origins', '*:*');
 io.on('connection', (socket)=>{
   console.log("new connection")
   console.log("coneccion ",socket.id)
@@ -105,4 +89,10 @@ io.on('connection', (socket)=>{
   });
 
 });
+
+var port = 8080
+server.listen(port, () => {
+  console.log(`Server on port ${port}`);
+});
+
 
