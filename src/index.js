@@ -90,7 +90,7 @@ io.on('connection', (socket)=>{
 
 });
 
-var port = 443
+var port = 8080
 server.listen(port, () => {
   console.log(`Server on port ${port}`);
 });
