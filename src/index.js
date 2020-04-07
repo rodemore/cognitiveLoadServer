@@ -16,18 +16,18 @@ const bodyParser = require('body-parser')
 
 
 
-/**
+
  app.use(cors(
   config.application.cors.server
 ));
-*/
+
 app.use((req, res, next) => {
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
    next();
 }) 
-app.use(cors());
+//app.use(cors());
 app.options('*', cors());
 
 // settings
@@ -60,7 +60,7 @@ var io = require('socket.io')(server);
 
 
 
-//io.set('origins', '*:*');
+io.set('origins', '*:*');
 io.on('connection', (socket)=>{
   console.log("new connection")
   console.log("coneccion ",socket.id)
